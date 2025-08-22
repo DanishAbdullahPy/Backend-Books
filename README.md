@@ -1,95 +1,115 @@
-📚 Book Tracker Backend
-A robust, scalable REST backend for managing books, built with best-practice NestJS architecture, Prisma ORM, and PostgreSQL.
+# Book Tracker Backend
 
-🛠 Tech Stack
-NestJS (TypeScript)
+REST API for managing books, built with a best-practice NestJS architecture, Prisma ORM, and PostgreSQL.
 
-Prisma ORM
+-----
 
-PostgreSQL (Neon free tier recommended)
+## 🛠 Tech Stack
 
-🧩 Architecture & Approach
-Feature-Based Modularity:
-All book-related logic resides in a dedicated BooksModule, following the modular structure recommended by NestJS. This structure enables effortless scaling—new features or resources can be added by simply creating new modules.
+  - **NestJS** (TypeScript)
+  - **Prisma ORM**
+  - **PostgreSQL** (Neon free tier recommended)
 
-Dependency Injection:
-Controllers delegate to services using NestJS’s DI system, creating a clear separation between API logic and business/data logic.
+-----
 
-Type Safety:
-100% TypeScript is used throughout the codebase, providing static type checking, robust IDE support, and fewer runtime errors.
+## 🧩 Architecture & Approach
 
-Prisma ORM:
-Database access is handled with a singleton PrismaService, which wraps the Prisma Client for efficient DB connection management. The Book model is defined and managed via Prisma migrations.
+This project is built with a focus on professional, maintainable, and scalable backend development.
 
-RESTful API:
-Exposes clear, conventional endpoints (GET /books, POST /books) returning JSON responses for frontend or any REST client.
+  - **Feature-Based Modularity**: All book-related logic resides in a dedicated `BooksModule`. This modular structure, recommended by NestJS, allows for effortless scaling—new features or resources can be added by simply creating new modules.
 
-Environment-Driven Config:
-Environment variables store database connection strings and CORS origins, supporting secure deployments and easy local development.
+  - **Dependency Injection**: Controllers delegate to services using NestJS's DI system. This creates a clear separation between API logic and business/data logic, making the codebase easier to test and maintain.
 
-CORS Security:
-CORS is configured for both development and production via environment, ensuring the API is only accessible by specified frontends.
+  - **Type Safety**: The entire codebase is built with TypeScript, providing static type checking, robust IDE support, and fewer runtime errors.
 
-🚀 Getting Started
-1. Clone Repository & Install Dependencies
-bash
+  - **Prisma ORM**: Database access is handled with a singleton `PrismaService`, which wraps the Prisma Client for efficient DB connection management. The `Book` model is defined and managed via Prisma migrations.
+
+  - **RESTful API**: The API exposes clear, conventional endpoints (`GET /books`, `POST /books`) that return JSON responses, making it easy to consume from a frontend or any REST client.
+
+  - **Environment-Driven Configuration**: Environment variables are used to store sensitive data like database connection strings and CORS origins. This approach supports secure deployments and makes local development straightforward.
+
+  - **CORS Security**: CORS is configured for both development and production environments, ensuring the API is only accessible by specified frontends.
+
+-----
+
+## 🚀 Getting Started
+
+Follow these steps to get the project up and running.
+
+### 1\. Clone Repository & Install Dependencies
+
+```bash
 git clone https://github.com/YOUR_USERNAME/Backend-Books.git
 cd Backend-Books
 npm install
-2. Configure Environment
-Create a .env file in the root directory:
+```
 
-text
+### 2\. Configure Environment
+
+Create a `.env` file in the root directory and add the following configuration.
+
+```text
 DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
 PORT=4000
 ALLOWED_ORIGINS=https://your-frontend-url.com,http://localhost:3000
-3. Prisma Setup
-bash
+```
+
+### 3\. Prisma Setup
+
+Generate the Prisma client and sync your database schema.
+
+```bash
 npx prisma generate
-npx prisma db push   # or npx prisma migrate deploy (if using migrations)
-4. Start the API Server
-bash
+npx prisma db push
+# or npx prisma migrate dev (if using migrations for schema versioning)
+```
+
+### 4\. Start the API Server
+
+```bash
 npm run start:dev
-Default port: 4000 (configurable via PORT environment variable).
+```
 
-📖 API Endpoints
-Method	Endpoint	Description	Request Body
-GET	/books	Retrieve all books	-
-POST	/books	Add a new book	{ "title": "Book Title", "author": "Author" }
-📁 Folder Structure
-text
+The API will be available at `http://localhost:4000` (configurable via the `PORT` environment variable).
+
+-----
+
+## 📖 API Endpoints
+
+| Method | Endpoint | Description | Request Body |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/books` | Retrieve all books. | - |
+| `POST` | `/books` | Add a new book. | `{ "title": "Book Title", "author": "Author" }` |
+
+-----
+
+## 📁 Folder Structure
+
+```text
 src/
-  books/
-    books.controller.ts
-    books.module.ts
-    books.service.ts
-  prisma.service.ts
-  app.module.ts
-  main.ts
+├── books/
+│   ├── books.controller.ts
+│   ├── books.module.ts
+│   └── books.service.ts
+├── prisma.service.ts
+├── app.module.ts
+└── main.ts
 prisma/
-  schema.prisma
+└── schema.prisma
 .env
-📝 Development Notes
-Easily extensible: Add new modules and providers as needed.
+```
 
-Safe for production: Never hardcodes sensitive configuration.
+-----
 
-Integrated CORS: Works out of the box with your Next.js or any frontend.
+## 📝 Development Notes
 
-Automated DB Sync: Use Prisma migrations to version control your database schema.
+  - **Easily extensible**: Add new modules and providers as needed to extend the functionality.
+  - **Production-safe**: Never hardcode sensitive configuration data.
+  - **Integrated CORS**: Works out of the box with any frontend, including Next.js, by configuring the `ALLOWED_ORIGINS` environment variable.
+  - **Automated DB Sync**: Use Prisma migrations to version-control your database schema, making future changes straightforward and reliable.
 
-⚖️ License
-MIT
+-----
 
-💡 Approach (Expanded)
-This backend codebase closely mirrors professional NestJS backend projects:
+## ⚖️ License
 
-All logic for a given domain (here, books) is grouped—making it easy for teams to collaborate and maintain clear code boundaries.
-
-Rigid use of environment variables keeps sensitive data away from public code and supports clean multi-environment deployments (local, production, preview, etc).
-
-Prisma’s type-safe queries and migrations provide reliable, maintainable database integration—future migrations are straightforward and robust.
-
-Clear, RESTful routes and clean JSON payloads make the API easy to consume and test.
-
-The main server bootstrap file is simple and clear—CORS origins and port numbers are dynamic, never hardcoded, and easily tuned for any deployment.
+This project is licensed under the MIT License.
