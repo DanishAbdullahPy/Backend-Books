@@ -13,9 +13,12 @@ async function bootstrap() {
   const allowedOrigins = parseAllowedOrigins(process.env.ALLOWED_ORIGINS);
 
   app.enableCors({
-    origin: allowedOrigins,
-    credentials: true,
-  });
+  origin: parseAllowedOrigins(process.env.ALLOWED_ORIGINS),
+  methods: ["GET","POST", ],
+  allowedHeaders: ["Content-Type"],
+  credentials: true,
+});
+
 
   const port = process.env.PORT || 4000;
   await app.listen(port);
