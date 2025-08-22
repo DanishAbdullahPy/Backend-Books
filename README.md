@@ -1,5 +1,41 @@
 # Book Tracker Backend
 
+Approach
+This backend is designed and structured for clarity, scalability, and best practices commonly used in production NestJS projects. Here’s a breakdown of the approach:
+
+1. Modular Architecture
+Feature Modules: The entire books business logic is isolated in a dedicated BooksModule—this includes its own controller and service, following the NestJS recommendation for feature-based structure. This keeps the codebase organized and makes future scaling (e.g., adding users, authentication, other resources) effortless.
+
+Dependency Injection: NestJS DI enables clean separation—controllers delegate to services for business logic and data access.
+
+2. TypeScript-First, Type-Safe
+The app is written 100% in TypeScript, providing static type checking and enabling robust code hints, refactoring, and error prevention.
+
+DTOs & types ensure all parts of the stack know exactly what data is expected.
+
+3. Prisma as ORM
+PrismaService is a singleton service wrapping the Prisma Client.
+
+Prisma provides simple, readable, and type-safe access to Postgres, as well as automatic schema migrations.
+
+By using the Prisma Book model, all DB interactions are abstracted away from the rest of the application.
+
+4. RESTful API Design
+Fully RESTful endpoints: GET /books and POST /books, following clear and conventional resource routes.
+
+All responses are application/json, making it trivial for the frontend (or any other client) to consume the API.
+
+5. Environment-Driven Configuration
+Sensitive and deployment-specific values (database URLs, CORS origins, etc.) are never hardcoded but pulled from environment variables.
+
+This enables safe deployment on Render, Vercel, or any cloud platform, and easy local development.
+
+6. CORS Setup
+CORS is enabled at the server level, reading frontend origins from the environment.
+
+This makes the backend securely accessible only to designated frontend(s), supporting both local and production deployments.
+
+
 **Tech Stack:**  
 - NestJS (TypeScript)
 - Prisma ORM
